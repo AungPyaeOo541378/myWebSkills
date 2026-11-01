@@ -20,7 +20,7 @@
             </h1>
 
             <!--subtitle with colorful accents -->
-            <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl">
+            <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl mt-10">
                 I build <span class="text-pink-600 font-semibold">modern</span>, 
                 <span class="text-purple-600 font-semibold">accessible</span> and 
                 <span class="text-blue-600 font-semibold">beautiful</span> web experiences that make an impact.
@@ -28,7 +28,7 @@
 
            <!--buttons-->
             <div class="flex flex-wrap items-center gap-3 pt-2">
-                <a href="" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-semibold text-sm shadow-lg shadow-purple-500/25 active:scale-95 transition cursor-pointer">
+                <a href="{{route('viewMyWork')}}" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-semibold text-sm shadow-lg shadow-purple-500/25 active:scale-95 transition cursor-pointer">
                     View My Work
                 </a>
                 <a href="" class="px-6 py-3 rounded-2xl bg-white/90 hover:bg-white text-slate-700 font-semibold text-sm border border-slate-200/80 shadow-xs active:scale-95 transition cursor-pointer">
@@ -39,7 +39,7 @@
            <!--social icons-->
             <div class="flex items-center gap-3 pt-2">
                 <span class="text-xs font-medium text-slate-400">Find me on</span>
-                <a href="https://github.com" target="_blank" class="w-9 h-9 rounded-xl bg-white/90 hover:bg-white text-slate-700 hover:text-purple-600 flex items-center justify-center border border-slate-200/80 shadow-xs transition">
+                <a href="https://github.com/AungPyaeOo541378" target="_blank" class="w-9 h-9 rounded-xl bg-white/90 hover:bg-white text-slate-700 hover:text-purple-600 flex items-center justify-center border border-slate-200/80 shadow-xs transition">
                     <i class="fa-brands fa-github text-sm"></i>
                 </a>
                 <a href="https://linkedin.com" target="_blank" class="w-9 h-9 rounded-xl bg-white/90 hover:bg-white text-slate-700 hover:text-purple-600 flex items-center justify-center border border-slate-200/80 shadow-xs transition">
@@ -50,11 +50,11 @@
                 </a>
             </div>
 
-            {{-- Location & Availability Tags --}}
+           <!--location-->
             <div class="flex flex-wrap items-center gap-4 pt-3 text-xs text-slate-500 font-medium">
                 <div class="flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-pink-500"></span>
-                    <span>Based in Yangon, Myanmar</span>
+                    <span>Based in Miki, Japan</span>
                 </div>
                 <div class="flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -64,33 +64,34 @@
 
         </div>
 
-        {{-- Right Content: Photo + Organic Blobs + Floating Cards --}}
+        <!--Profile image-->
         <div class="lg:col-span-5 relative flex items-center justify-center py-8">
             
-            {{-- Purple Organic Blob Shape --}}
+            
             <div class="absolute w-72 h-80 sm:w-80 sm:h-96 bg-gradient-to-tr from-purple-400 via-violet-400 to-indigo-400 rounded-[45%_55%_65%_35%/50%_45%_55%_50%] opacity-90 shadow-2xl shadow-purple-500/25"></div>
             
-            {{-- Soft Lavender Background Blob --}}
-            <div class="absolute w-80 h-72 sm:w-88 sm:h-84 bg-purple-200/60 rounded-[55%_45%_40%_60%/45%_55%_45%_55%] -rotate-12 blur-sm"></div>
+           <!--background shape-->
+            <div class="absolute w-80 h-72 sm:w-88 sm:h-84
+             bg-purple-200/60 rounded-[55%_45%_40%_60%/45%_55%_45%_55%] rotate-12 blur-sm"></div>
 
-            {{-- Profile Photo --}}
+           <!--Profile Photo-->
             <div class="relative z-10 flex items-center justify-center">
                 <img src="{{ asset('images/apo.png') }}" alt="Aung Pyae Oo" class="w-64 sm:w-72 max-h-[380px] object-contain drop-shadow-xl">
             </div>
 
-            {{-- Floating Card 1: Top-Left (Clean Code) --}}
+           <!--floating cards 1-->
             <div class="absolute -top-3 left-2 sm:-left-4 z-20 bg-white/90 backdrop-blur-md px-3.5 py-2.5 rounded-2xl border border-white/80 shadow-lg shadow-purple-900/5">
                 <h4 class="text-xs font-bold text-slate-800">Clean Code</h4>
                 <p class="text-[10px] text-slate-500">Scalable & maintainable solutions</p>
             </div>
 
-            {{-- Floating Card 2: Right-Middle (UI/UX Focused) --}}
+            <!--Floating Card 2-->
             <div class="absolute top-1/2 -right-3 sm:-right-6 -translate-y-1/2 z-20 bg-white/90 backdrop-blur-md px-3.5 py-2.5 rounded-2xl border border-white/80 shadow-lg shadow-purple-900/5">
                 <h4 class="text-xs font-bold text-slate-800">UI/UX Focused</h4>
                 <p class="text-[10px] text-slate-500">Designing intuitive experiences</p>
             </div>
 
-            {{-- Floating Card 3: Bottom-Left (Performance) --}}
+            <!--floating cards 3-->
             <div class="absolute -bottom-4 left-4 sm:left-6 z-20 bg-white/90 backdrop-blur-md px-3.5 py-2.5 rounded-2xl border border-white/80 shadow-lg shadow-purple-900/5">
                 <h4 class="text-xs font-bold text-slate-800">Performance</h4>
                 <p class="text-[10px] text-slate-500">Fast, optimized and user-friendly websites</p>

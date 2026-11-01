@@ -31,29 +31,29 @@
 
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-15">
 
-    {{-- ── left side:Creat image ── --}}
+    <!-- left side:Creat image -->
     <div class="lg:col-span-1">
         <div class="bg-white mt-3 rounded-2xl shadow-sm border border-slate-200 overflow-hidden min-h-[380px] flex flex-col justify-between">
 
             <div>
-                {{-- Card Header --}}
+                <!-- Card Header -->
                 <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-3 h-[45px] shrink-0 flex items-center justify-between">
                     <div>
                         <h2 class="text-white font-semibold text-xs uppercase tracking-wider" data-lang-key="add_new_record"><i class="fa-regular fa-plus fa-fade fa-lg" style="color: rgb(255, 255, 255);"></i>Add New Record</h2>
                     </div>
                 </div>
 
-                {{-- Card Body --}}
+                <!-- Card Body -->
                 <form action="{{ route('imgStore') }}" method="post" enctype="multipart/form-data" class="p-3.5 space-y-2.5">
                     @csrf
-                    {{-- Centered Fixed-Size Image Preview Box --}}
+                    <!-- Centered Fixed-Size Image Preview Box -->
                     <div class="flex flex-col items-center justify-center">
                         <div class="relative rounded-xl overflow-hidden border-2 border-dashed border-slate-300 bg-slate-50 shadow-inner flex items-center justify-center group-hover:border-blue-400 transition-all duration-200 shrink-0">
-                            <img src="" alt="" id="imagePreview" width="200px" height="200px" class=" object-center block object-contain">
+                            <img src="{{asset('images/'. 'default.jpeg')}}" alt="" id="imagePreview" width="180px" height="180px" class="object-center block object-contain">
                         </div>
                     </div>
 
-                    {{-- Image File Input --}}
+                    <!-- Image File Input -->
                     <div>
                         <label for="image" class="block text-[10px] font-semibold text-slate-600 mb-0.5 uppercase tracking-wide">Image File</label>
                         <input type="file" name="image" id="image" accept="image/*" class="@error('image') border-2 border-red-400 bg-red-50 @enderror block w-full text-xs text-slate-500 file:mr-2.5 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer transition border border-slate-200 rounded-xl p-1 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="previewImage(event)">
@@ -62,18 +62,58 @@
                         @enderror
                     </div>
 
-                    {{-- Title Input --}}
+                    <!-- Category Select -->
                     <div>
-                        <label for="title" class="block text-[10px] font-semibold text-slate-600 mb-0.5 uppercase tracking-wide" data-lang-key="title_label">Title</label>
-                        <input type="text" id="title" name="title" placeholder="Enter title…" data-lang-placeholder="title_placeholder" value="{{ old('title') }}" class="@error('title') border-2 border-red-400 bg-red-50 @enderror w-full px-3 py-1.5 rounded-xl border border-slate-200 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
-                        @error('title')
+                        <label for="category_id" class="block text-[10px] font-semibold text-slate-600 mb-0.5 uppercase tracking-wide">Category</label>
+                        <select name="category_id" id="category_id" class="@error('category_id') border-2 border-red-400 bg-red-50 @enderror w-full px-3 py-1.5 rounded-xl border border-slate-200 text-xs text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                            <option value="">Select Category...</option>
+                           
+                            
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->category_name }}
+                                </option>
+                            @endforeach
+
+                            
+                        </select>
+                        @error('category_id')
+                        <span class="text-xs text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                   
+
+                    {{-- Product Name Input --}}
+                    <div>
+                        <label for="product_name" class="block text-[10px] font-semibold text-slate-600 mb-0.5 uppercase tracking-wide">Product Name</label>
+                        <input type="text" id="product_name" name="product_name" placeholder="Enter product name…" value="{{ old('product_name') }}" class="@error('product_name') border-2 border-red-400 bg-red-50 @enderror w-full px-3 py-1.5 rounded-xl border border-slate-200 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                        @error('product_name')
+                        <span class="text-xs text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    {{-- Price Input --}}
+                    <div>
+                        <label for="price" class="block text-[10px] font-semibold text-slate-600 mb-0.5 uppercase tracking-wide">Price ($)</label>
+                        <input type="number" id="price" name="price" placeholder="Enter price…" value="{{ old('price') }}" min="0" step="1" class="@error('price') border-2 border-red-400 bg-red-50 @enderror w-full px-3 py-1.5 rounded-xl border border-slate-200 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                        @error('price')
+                        <span class="text-xs text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    {{-- Description Input --}}
+                    <div>
+                        <label for="description" class="block text-[10px] font-semibold text-slate-600 mb-0.5 uppercase tracking-wide">Description</label>
+                        <textarea id="description" name="description" rows="3" placeholder="Enter product description…" class="@error('description') border-2 border-red-400 bg-red-50 @enderror w-full px-3 py-1.5 rounded-xl border border-slate-200 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition resize-none">{{ old('description') }}</textarea>
+                        @error('description')
                         <span class="text-xs text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
                     {{-- Submit Button --}}
                     <div class="pt-1">
-                        <input type="submit" value="Create" data-lang-key="create_btn" class="w-full bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-semibold py-2 rounded-xl transition-all duration-150 shadow-sm cursor-pointer">
+                        <input type="submit" value="Create Product" data-lang-key="create_btn" class="w-full bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-semibold py-2 rounded-xl transition-all duration-150 shadow-sm cursor-pointer">
                     </div>
                 </form>
             </div>
@@ -82,50 +122,63 @@
 
     {{--right side card--}}
      <div class="lg:col-span-2 mt-3">
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden  flex flex-col justify-between">
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col justify-between">
 
             {{-- Card Header (45px) --}}
             <div class="px-4 py-2.5 border-b border-slate-100 bg-slate-400 flex items-center justify-between shrink-0 h-[45px]">
                 <div>
-                    <h2 class="text-slate-900  font-semibold text-xs uppercase tracking-wider" data-lang-key="all_records">📋 All Records</h2>
+                    <h2 class="text-slate-900 font-semibold text-xs uppercase tracking-wider" data-lang-key="all_records">📋 All Records</h2>
                 </div>
                 <span class="bg-blue-50 text-blue-600 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
                     <span>{{ $dataImgCRUD->total() }}</span> <span data-lang-key="records_suffix">records</span>
                 </span>
             </div>
 
-            <!-- Loop All Card Body (Exact Fixed 250px Height) -->
-            <div class="divide-y divide-slate-100  shrink-0 flex flex-row justify-start overflow-hidden">
+            <!-- Loop All Card Body -->
+            <div class="p-4 flex flex-row gap-3.5 overflow-x-auto min-h-[320px] items-start">
                 @if($dataImgCRUD->count() == 0)
-                    <div class="flex flex-col items-center justify-center h-full text-center px-4">
+                    <div class="flex flex-col items-center justify-center h-48 w-full text-center px-4">
                         <div class="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-xl mb-1.5">
                             📭
                         </div>
                         <h3 class="text-slate-700 font-semibold text-xs" data-lang-key="no_records_title">No records yet</h3>
-                        <p class="text-slate-400 text-[11px] mt-0.5" data-lang-key="no_records_desc">Add your first text record using the form on the left.</p>
+                        <p class="text-slate-400 text-[11px] mt-0.5" data-lang-key="no_records_desc">Add your first product record using the form on the left.</p>
                     </div>
                 @else
                     @foreach ($dataImgCRUD as $item)
-                      <div class="flex flex-row gap-2 p-3 h-60">
-                           <div class=" rounded-lg bg-white p-4 shadow ">
-    
-                             <img src="{{asset('images/'. $item->image)}}" width="150px" height="200px" class=" rounded-lg">
+                        <div class="rounded-xl bg-white p-3 border border-slate-200 shadow-sm w-[175px] shrink-0 flex flex-col justify-between hover:shadow-md transition">
                             
-                             <div class="py-2 mt-4">
-                                <span class="text-sm ">Title: <span class="text-sm text-slate-600">{{ $item->title }} </span> </span>
-                             </div>
-                             <div class="flex items-center gap-2">
-                                    <a href="{{route('imgDetail', $item->id)}}" class="text-[11px] text-gray-600 hover:underline font-medium" data-lang-key="details">Details</a>
-                                    <a href="" class="text-[11px] text-blue-600 hover:underline font-medium" data-lang-key="edit">Edit</a>
-                                    <a href="{{route('imgDelete' , $item->id)}}"  class="text-[11px] text-red-600 hover:underline font-medium" data-lang-key="delete">Delete</a>
-                                </div>
-
-                               
+                            {{-- Image Container --}}
+                            <div class="w-full h-36 rounded-lg overflow-hidden bg-slate-50 border border-slate-100 mb-2">
+                                <img src="{{ asset('images/' . $item->image) }}" class="w-full h-full object-cover rounded-lg" alt="{{ $item->product_name }}">
                             </div>
-                      </div>
+                            
+                            {{-- Details --}}
+                            <div class="mb-2">
+                                <span class="inline-block px-2 py-0.5 rounded-md text-[9px] font-semibold bg-blue-50 text-blue-600 mb-1">
+                                    {{ $item->category->category_name ?? 'General' }}
+                                </span>
+                                <p class="text-xs font-bold text-slate-800 truncate" title="{{ $item->product_name }}">
+                                    {{ $item->product_name }}
+                                </p>
+                                <p class="text-xs font-bold text-emerald-600 mt-0.5">
+                                    ${{ number_format($item->price) }}
+                                </p>
+                                <p class="text-[10px] text-slate-400 mt-0.5">
+                                    {{ $item->created_at ? $item->created_at->format('d M Y') : '' }}
+                                </p>
+                            </div>
+
+                            {{-- Action Buttons --}}
+                            <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-[11px]">
+                                <a href="{{ route('imgDetail', $item->id) }}" class="text-gray-600 hover:text-slate-900 hover:underline font-medium" data-lang-key="details">Details</a>
+                                <a href="{{route('imgEditPage', $item->id)}}" class="text-blue-600 hover:text-blue-700 hover:underline font-medium" data-lang-key="edit">Edit</a>
+                                <a href="{{ route('imgDelete', $item->id) }}" class="text-red-600 hover:text-red-700 hover:underline font-medium" data-lang-key="delete">Delete</a>
+                            </div>
+
+                        </div>
                     @endforeach
                 @endif
-
             </div>
 
                        {{-- Pagination Links Bar (Exact Fixed 45px Height at Bottom) --}}
@@ -200,7 +253,5 @@
 </div>
 
 
-{{-- Include Reusable Delete Modal --}}
-@include('forTextCRUD.deleteText')
 
 @endsection

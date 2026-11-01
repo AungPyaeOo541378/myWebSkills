@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
 return new class extends Migration
 {
     /**
@@ -14,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('image_c_r_u_d_s', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->unsignedBigInteger('category_id');
+            $table->string('product_name');
             $table->string('image');
+            $table->integer('price');
+            $table->text('description');
             $table->timestamps();
         });
     }

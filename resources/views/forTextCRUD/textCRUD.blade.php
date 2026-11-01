@@ -127,7 +127,7 @@
                                 <div class="flex items-center gap-2">
                                     <a href="{{ route('textDetail', $item->id)}}" class="text-[11px] text-gray-600 hover:underline font-medium" data-lang-key="details">Details</a>
                                     <a href="{{ route('textEditPage', $item->id)}}" class="text-[11px] text-blue-600 hover:underline font-medium" data-lang-key="edit">Edit</a>
-                                    <a href="javascript:void(0)" onclick="openDeleteModal('{{ route('textDelete', $item->id) }}', '{{ addslashes($item->title) }}')" class="text-[11px] text-red-600 hover:underline font-medium" data-lang-key="delete">Delete</a>
+                                    <a href="{{ route('textDelete', $item->id)}}"  class="text-[11px] text-red-600 hover:underline font-medium" data-lang-key="delete">Delete</a>
                                 </div>
                             </div>
                         </div>
@@ -204,7 +204,5 @@
         <p class="text-xs text-slate-600 text-center">{{ date('Y') }} © All rights reserved. Design by Aung Pyae Oo.</p>
 </div>
 
-{{-- Include Reusable Delete Modal --}}
-@include('forTextCRUD.deleteText')
 
 @endsection

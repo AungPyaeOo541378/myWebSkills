@@ -21,7 +21,7 @@
             </a>
 
             {{-- Delete Anchor Tag (Triggers Custom Modal Alert) --}}
-            <a href="javascript:void(0)" onclick="openDeleteModal()" class="inline-flex items-center gap-2 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium text-sm rounded-xl transition shadow-sm cursor-pointer">
+            <a href="{{ route('textDelete', $data->id)}}"  class="inline-flex items-center gap-2 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium text-sm rounded-xl transition shadow-sm cursor-pointer">
                 <i class="fa-solid fa-trash"></i> Delete
             </a>
         </div>
@@ -64,7 +64,6 @@
 
 </div>
 
-{{-- Include Delete Modal Component --}}
-@include('forTextCRUD.deleteText')
+
 
 @endsection

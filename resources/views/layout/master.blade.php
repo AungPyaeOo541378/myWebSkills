@@ -21,7 +21,7 @@
         <div>
             <!-- Brand Logo & Title -->
             <div class="flex items-center space-x-3 p-2 mb-6">
-                <div class="bg-blue-600 text-white p-2 rounded-lg font-bold">&lt;/&gt;</div>
+                <div class="bg-blue-600 text-white p-2 rounded-lg font-bold">&lt;A&gt;</div>
                 <div>
                     <h1 class="font-bold text-white text-base">Web Skills Lab</h1>
                     <p class="text-xs text-slate-400">My Portfolio & Skills Demo</p>
@@ -42,7 +42,7 @@
                     <span data-lang-key="text_crud">📄 Text CRUD</span>
                 </a>
 
-                <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 text-slate-400 transition">
+                <a href="{{ route('search') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 text-slate-400 transition">
                     <span data-lang-key="search_filter">🔍 Search & Filter</span>
                 </a>
             </nav>
@@ -51,7 +51,7 @@
         <!-- Profile Info at Bottom Sidebar -->
         <div class="border-t border-slate-800 pt-4 flex items-center space-x-3">
             <div class="w-9 h-9 rounded-full bg-slate-700 flex items-center justify-center font-bold text-white">
-                A
+                <img src="{{asset('images/apo.png')}}" class="w-full h-full object-cover rounded-full " alt="">
             </div>
             <div>
                 <h2 class="text-sm font-semibold text-white">Aung Pyae Oo</h2>
@@ -203,21 +203,7 @@
         applyLanguage(currentLang);
     });
 
-    function openDeleteModal(deleteUrl = null, title = null) {
-        if (deleteUrl) {
-            const btn = document.getElementById('confirmDeleteBtn');
-            if (btn) btn.href = deleteUrl;
-        }
-        if (title) {
-            const titleElem = document.getElementById('deleteItemTitle');
-            if (titleElem) titleElem.innerText = `${title}`;
-        }
-        document.getElementById('deleteModal').classList.remove('hidden');
-    }
-
-    function closeDeleteModal() {
-        document.getElementById('deleteModal').classList.add('hidden');
-    }
+ 
 
 
     function previewImage(event) {
@@ -232,6 +218,9 @@
             reader.readAsDataURL(event.target.files[0]);
         }
     }
+
+
+  
 
    
 
